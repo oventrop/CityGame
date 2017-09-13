@@ -4,6 +4,6 @@ import java.util.LinkedList;
 
 public class Cities {
 
-	LinkedList cities = new LinkedList();
+	LinkedList<Cities> cities = new LinkedList();
 	
 }
