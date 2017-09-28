@@ -23,7 +23,8 @@ public class Cities {
 		String s = null;
 		try {
 			ArrayList<String> a = new ArrayList<String>();
-			FileReader fr = new FileReader("d:\\_JAVA\\CityGame\\cities.txt");
+			
+			FileReader fr = new FileReader("d:\\_JAVA\\CityGame\\Cities.txt");
 			BufferedReader br = new BufferedReader(fr);
 			
 			while ( ( s = br.readLine()) != null) {
@@ -40,6 +41,9 @@ public class Cities {
 			e.printStackTrace();
 		}
 
+	}
+	public void removeCity (int x) {
+		cities.remove(x);
 	}
 
 }

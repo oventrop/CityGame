@@ -1,40 +1,52 @@
 package by.htp.citygame;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.ListIterator;
-
 public class Player {
 
-	public Character makeMove(char c) {
-		Cities city = new Cities();
-		ArrayList<String> list = city.getCities();
-		ListIterator<String> it = list.listIterator();
-		while (it.hasNext()) {
-			String i = it.next();
-			if (i.charAt(0) == c) {
-				System.out.println(i);
-				it.remove();
-				city.setCities(list);
-				return getLastChar(i);
+	char lastChar;
+
+	public void makeMove(Cities city, char c) {
+
+		for (int i = 0; i < city.getCities().size(); i++) {
+			String s = city.getCities().get(i);
+			if (s.charAt(0) == c) {
+				 System.out.println(city.getCities().get(i));
+				setLastChar(getLastChar(s));
+				city.removeCity(i);
+				break;
 			}
 		}
-		return null;
 	}
 
-	public static Character getFirstChar(String city) {
-		return city.charAt(0);
-	}
-
-	public static Character getLastChar(String city) {
-		int pos = city.length();
-		char lastChar = city.toUpperCase().charAt(pos);
-		if (city.toUpperCase().charAt(pos) == 'É') {
-			return 'È';
-		} else if (lastChar == 'Ü' || lastChar == 'Û' || lastChar == 'Ú') {
-			pos--;
+	public boolean hasNextCity(Cities city, char c) {
+		boolean flag = false;
+		for (int i = 0; i < city.getCities().size(); i++) {
+			String s = city.getCities().get(i);
+			if (s.charAt(0) == c) {
+				flag = true;
+				break;
+			}
 		}
+		return flag;
+	}
 
+	public char getLastChar() {
+		return lastChar;
+	}
+
+	public void setLastChar(char temp) {
+		this.lastChar = temp;
+	}
+
+	public char getLastChar(String city) {
+		int pos = city.length() - 1;
+		city = city.trim();
+		char lastChar = city.toUpperCase().charAt(pos);
+		if (lastChar == 'É') {
+			return 'È';
+		} else if (lastChar == 'Ü' || lastChar == 'Ú' || lastChar == 'Û' || lastChar == 'Ö') {
+			pos = pos - 1;
+			lastChar = city.toUpperCase().charAt(pos);
+		}
 		return lastChar;
 	}
 }
